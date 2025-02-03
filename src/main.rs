@@ -88,6 +88,13 @@ enum Opts {
         )]
         hidden: bool,
 
+        #[structopt(
+            short = "g",
+            long = "no-transfer-git",
+            help = "Do not transfer .git"
+        )]
+        no_transfer_git: bool,
+
         #[structopt(help = "cargo command that will be executed remotely")]
         command: String,
 
@@ -110,6 +117,7 @@ fn main() {
         no_copy_lock,
         manifest_path,
         hidden,
+        no_transfer_git,
         command,
         options,
     } = Opts::from_args();
@@ -159,6 +167,10 @@ fn main() {
 
     if !hidden {
         rsync_to.arg("--exclude").arg(".*");
+    }
+
+    if no_transfer_git {
+        rsync_to.arg("--exclude").arg(".git");
     }
 
     rsync_to
