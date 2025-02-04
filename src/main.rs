@@ -89,7 +89,7 @@ enum Opts {
         hidden: bool,
 
         #[structopt(
-            short = "g",
+            short = "G",
             long = "no-transfer-git",
             help = "Do not transfer .git. Note that .git is hidden so .git is transferred only if --transfer-hidden is set and --no-transfer-git is not set"
         )]
